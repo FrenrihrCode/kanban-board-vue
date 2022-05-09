@@ -3,7 +3,11 @@ import { defineComponent } from 'vue'
 import { useKanbanStore } from '~/store/kanban'
 
 export default defineComponent({
-  emits: ['open-modal'],
+  emits: {
+    openModal(payload: string) {
+      return payload
+    },
+  },
   setup() {
     const kanbanStore = useKanbanStore()
 
@@ -25,10 +29,10 @@ export default defineComponent({
         v-for="(column, $columnIndex) of kanbanStore.columns" :key="$columnIndex"
         class="flex flex-col flex-shrink-0 w-72"
       >
-        <TitleColumn :title="column.name" @btn-click="$emit('open-modal')" />
+        <TitleColumn :title="column.name" @btn-click="$emit('openModal', column.id)" />
         <Task
           v-for="(task, $taskIndex) of column.tasks" :key="$taskIndex" :title="task.title"
-          :description="task.description" :color="column.color"
+          :description="task.description" :color="column.color" :tag="task.tag"
         />
       </div>
     </div>

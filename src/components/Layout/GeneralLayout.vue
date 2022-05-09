@@ -16,7 +16,6 @@ export default {
     class="flex flex-col w-screen h-screen overflow-auto bg-gradient-to-tr from-sky-100 via-blue-100 to-indigo-100"
   >
     <div class="flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75 shadow-lg">
-      <div i-carbon-sun class="text-sky-600" />
       <svg
         class="w-8 h-8 text-sky-600 fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
         viewBox="0 0 24 24"
@@ -44,6 +43,7 @@ export default {
       </button>
     </div>
     <slot />
+    <general-loader />
   </main>
 </template>
 

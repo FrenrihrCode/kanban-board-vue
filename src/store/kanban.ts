@@ -1,16 +1,37 @@
 import { defineStore } from 'pinia'
-import type { KanbanColumn } from '~/interfaces/kanban.interface'
+import { useGeneralStore } from './general'
+import { KanbanService } from '~/db/kanban'
+import type { KanbanColumn, KanbanTask } from '~/interfaces/kanban.interface'
+
+const kanbanService = new KanbanService()
 
 export const useKanbanStore = defineStore('kanban', {
   state: (): { columns: KanbanColumn[]; modalOpen: boolean } => {
     return {
       modalOpen: false,
-      columns: [
-        { id: 'todo', name: 'Lista de tareas', color: 'slate', tasks: [{ title: 'test', description: '' }] },
-        { id: 'progress', name: 'En progreso', tasks: [] },
-        { id: 'dasd', name: 'ASDS', color: 'green', tasks: [{ title: 'test 2', description: 'asd' }] },
-        { id: 'dasd 1', name: 'ASDS 1', tasks: [] },
-      ],
+      columns: [],
     }
+  },
+  actions: {
+    async getAllBoards() {
+      const general = useGeneralStore()
+      general.loadingApp = true
+      try {
+        const boards = await kanbanService.getAll()
+        this.columns = boards
+      }
+      catch (error) {
+        console.error(error)
+      }
+      general.loadingApp = false
+    },
+    async createNewTask(task: KanbanTask, board: string) {
+      try {
+        await kanbanService.addTask(task, board)
+      }
+      catch (error) {
+        console.error(error)
+      }
+    },
   },
 })
