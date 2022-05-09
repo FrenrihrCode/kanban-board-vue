@@ -8,9 +8,14 @@ declare module '@vue/runtime-core' {
     Board: typeof import('./src/components/Board/Board.vue')['default']
     Counter: typeof import('./src/components/Counter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    GeneralLayout: typeof import('./src/components/Layout/GeneralLayout.vue')['default']
+    GeneralModal: typeof import('./src/components/Modal/GeneralModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Task: typeof import('./src/components/Task/Task.vue')['default']
+    TaskForm: typeof import('./src/components/Form/TaskForm.vue')['default']
+    TitleColumn: typeof import('./src/components/Board/TitleColumn.vue')['default']
+    TwitterButton: typeof import('./src/components/Buttons/TwitterButton.vue')['default']
   }
 }
 
